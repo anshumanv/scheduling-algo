@@ -1,18 +1,18 @@
+import pandas as pd
+
 filename = input('Enter file name: ')	# Input file name
-process = []	# Array to store processes information
 
 # Open the input file
 try:
-	with open(filename, 'r') as ipfile:
-		process = ipfile.read().splitlines()
+	d = pd.read_csv(filename)	# Dataframe from CSV
 except:
 	print('Error opening file')
 	exit()
 
-# SJF(process)
+# SJF(d)
 
-# FCFS(process)
+# FCFS(d)
 
-# RR(process)
+# RR(d)
 
-print(process)
+print(d)
