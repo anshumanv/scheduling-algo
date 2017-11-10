@@ -1,3 +1,5 @@
+from SJF import sjf
+
 x = input("Enter file name ")	# File containing dataset
 
 process = []	# Array to store processes data
@@ -14,8 +16,8 @@ n = len(process)
 p = []
 for i in range(n):
 	p.append(process[i].split(' '))
-print(p)
+#print(p) Test print
 
-# SJF(p)
+sjf(p)
 # FCFS(p)
 # RR()
