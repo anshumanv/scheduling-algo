@@ -1,18 +1,21 @@
-import pandas as pd
+x = input("Enter file name ")	# File containing dataset
 
-filename = input('Enter file name: ')	# Input file name
+process = []	# Array to store processes data
 
-# Open the input file
+# Try opening the input file
 try:
-	d = pd.read_csv(filename)	# Dataframe from CSV
+	with open(x, "r") as f:
+		process = f.read().splitlines()
 except:
-	print('Error opening file')
+	print("Error opening file")
 	exit()
 
-# SJF(d)
+n = len(process)
+p = []
+for i in range(n):
+	p.append(process[i].split(' '))
+print(p)
 
-# FCFS(d)
-
-# RR(d)
-
-print(d)
+# SJF(p)
+# FCFS(p)
+# RR()
