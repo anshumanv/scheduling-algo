@@ -12,17 +12,19 @@ def sjf(p):
     wt = [0]*n 
     wt = np.transpose(wt)  
     p[0][1] = float(p[0][1]) 
+    idle = 1
     for i in range(n):
         if i!=0: 
             p[i][1] = float(p[i][1]) + float(p[i-1][1])
     p = sorted(p,key=itemgetter(5))
-    print("Enter Choice : general or complex ")
-    x = input()
+    x = input("Enter Choice : general or complex  ----- ")
     if x == "general" or x == "GENERAL":
         rt = [float(row[2]) for row in p]
     else :
-        rt = [float(row[2]) + float(row[3]) + float(row[4])  for row in p]
-    print(rt)
+        burst   = np.transpose([float(row[2])  for row in p])  
+        elapsed = np.transpose([float(row[3]) for row in p])     
+        w_p    =  np.transpose([float(row[4])  for row in p])
+        rt = burst + elapsed + w_p
     temp = copy.copy(rt) 
     # Run until all processes gets
     # completed
@@ -35,6 +37,7 @@ def sjf(p):
             if p[j][1]<= t and rt[j] < minm and rt[j] > 0:
                 minm = rt[j]
                 shortest = j
+                idle = 0
                 check = True
         
         if check == False: 
@@ -42,16 +45,19 @@ def sjf(p):
             continue;
         
         # Reduce remaining time by one
-        rt[shortest] = rt[shortest] - 1
-  
+        if rt[shortest]>0 :
+            rt[shortest] = rt[shortest] - 1
+        else:
+            idle = 1    
         # Update minimum
-        minm = rt[shortest]
+        if not idle:
+            minm = rt[shortest]
         if (minm == 0):
             minm = 10000000000000
  
         # If a process gets completely
         # executed
-        if (rt[shortest] == 0):
+        if (rt[shortest] == 0 and not idle):
             # Increment complete
             complete = complete + 1
             # Find finish time of current
@@ -64,11 +70,16 @@ def sjf(p):
                 wt[shortest] = 0
         # Increment time
         t = t + 1
+        idle = 0 
     tat = wt + temp
-    #compl = tat + [int(row[1]) for row in p]
     print("Process Id" ,"Waiting time","TurnAroundTime")
-    for i in range(n):
-        print(p[i][0],"         ",wt[i],"          ",tat[i])    
+    if x == "general" or x == "GENERAL":                        #for general case
+        for i in range(n):
+            print(p[i][0],"         ",wt[i] ,"          ",tat[i])    
+    else:                                                         #for complex case  
+        for i in range(n):
+            print(p[i][0],"         ",wt[i] + elapsed[i] + w_p[i] ,"          ",tat[i])
     avg = sum(tat)/n
     print("Average Completion Time  : ",avg)
     print("The Standard Deviation of completion is ",np.std(np.array(tat)))
+    return wt,tat
