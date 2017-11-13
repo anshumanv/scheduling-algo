@@ -7,7 +7,7 @@ def fcfs(p):
 	process = []
 
 	for i in range(len(p)):
-		process.append(p[i].split(' '))
+		process.append(p[i].split(" "))
 
 	for i in range(1, len(p)):
 		if process[i][1] == '0':

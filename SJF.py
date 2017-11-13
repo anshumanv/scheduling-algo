@@ -6,7 +6,7 @@ def sjf(p):
     complete = 0 
     t = 0 
     minm = 10000000000000000
-    shortest = 0 
+    shortest = 0
     check = False        
     art = [0]*n
     wt = [0]*n 
