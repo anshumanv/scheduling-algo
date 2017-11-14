@@ -11,6 +11,7 @@ def fcfs(process):
 				j = i
 				while process[j][5] < process[j - 1][5] and j >= 1:
 					process[j], process[j - 1] = process[j - 1], process[j]
+					j-=1
 
 	# Case for without interrupt
 	if case == 1:
