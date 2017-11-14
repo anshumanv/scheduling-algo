@@ -6,7 +6,7 @@ def sjf(p):					  # p is a 2D list
     n = len(p)                # n stores the total no. of processes
     complete = 0 			  # no. of completed processes							
     t = 0                     # intteger to represent time passed in sec
-    minm = sysmaxsize         # minm used to store the shortest remaining time (r[t]) 
+    minm = sys.maxsize         # minm used to store the shortest remaining time (r[t]) 
     shortest = 0	          # stores the index of the process with least remaining time  	
     check = False             # when no process has started execution and t is increementing      
     art = [0]*n               # list to store the arrival time 

@@ -26,7 +26,7 @@ while(True):
 	print("1: FCFS", "2: SJF", "3: RR", "4:EXIT", sep='\n')
 	cmd = input()
 	if cmd == '1':
-		fcfs(process)
+		fcfs(p)
 	elif cmd == '2':
 		sjf(p)
 	elif cmd == '3':

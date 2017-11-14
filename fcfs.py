@@ -1,18 +1,11 @@
 import numpy as np 		# Contains the method to calculate Standard Deviation
 
-def fcfs(p):
+def fcfs(process):
 
 	case = int(input('Without Interrupt (1) or With Interrupt (2): '))
 
-	# Stores the data of each process
-	process = []
-
-	# Splitting the string list of the each process into its specific attributes
-	for i in range(len(p)):
-		process.append(p[i].split(' '))
-
 	# If the relative arrival time is 0 this sort according to priority
-	for i in range(1, len(p)):
+	for i in range(1, len(process)):
 		if process[i][1] == '0':
 			if process[i][5] < process[i - 1][5]:
 				j = i
@@ -30,7 +23,7 @@ def fcfs(p):
 		turnAround = [int(process[0][2]) - int(process[0][1])] 		# Stores Turnaround time of every process
 		waiting = [0]												# Stores Waiting Time of every process
 
-		for i in range(1, len(p)):
+		for i in range(1, len(process)):
 			arrivalTime += int(process[i][1])															# Arrival time of the current process
 			completionTime = int(totalCompletion + max(int(process[i][2]), int(process[i - 1][1])))		# Completion time of the current process
 			totalCompletion += int(process[i][2])														# Total completion time till current process
@@ -53,7 +46,7 @@ def fcfs(p):
 		turnAround = [int(process[0][2]) + float(process[0][3]) + float(process[0][4]) - int(process[0][1])]	# Stores Turnaround time of every process
 		waiting = [float(process[0][3]) + float(process[0][4])]													# Stores Waiting Time of every process
 
-		for i in range(1, len(p)):
+		for i in range(1, len(process)):
 			arrivalTime += int(process[i][1])																											# Arrival time of the current process
 			completionTime = float(totalCompletion + max(int(process[i][2]) + float(process[i][3]) + float(process[i][4]), int(process[i - 1][1])))		# Completion time of the current process
 			totalCompletion += int(process[i][2]) + float(process[i][3]) + float(process[i][4])															# Total completion time till current process
