@@ -97,4 +97,3 @@ def round_robin():
     print(np.std(np.array(turnaround_array)))
     plt.plot(index, avg_wait_array)
     plt.show()
-round_robin()
