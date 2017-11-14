@@ -5,10 +5,17 @@ import copy as cp
 import matplotlib.pyplot as plt
 warnings.filterwarnings("ignore")
 def round_robin():
-    df = pd.read_csv('input.csv') # Reading the c.s.v file using pandas library
+
+    df = pd.read_csv("input.csv") # Reading the c.s.v file using pandas library
 
     arrival_time = df['Arrival_time']
-    burst_time = df['Execution'] + df["i"] + df["io"] + df["p"]
+
+    print("Enter complex or simple case")
+    case = input()
+    if case == "simple":
+        burst_time = df['Execution']
+    elif case == "complex":
+        burst_time = df['Execution'] + df['i'] + df['io']
 
     # Add the arrival times with previous value to get the absolute time
     for values in range(1,len(df)):
@@ -22,8 +29,10 @@ def round_robin():
     wait_array = [] # Stores the wait time for each process
     avg_wait_array = [] # Store the average wait time for various quantum time
 
+    print("Process_Id\tWait_time\tTurnaroundtime")
+
     for quantam in range(1, 100):
-        print("Process_ID\tWait_Time\tTurnaround_Time")
+
         remaining = len(df) # Number of unfinished processes
         flag = 0
         wait_time = 0
@@ -46,13 +55,16 @@ def round_robin():
             # If a process has just finished...
             if remain_time[count] == 0 and flag == 1:
                 remaining -= 1 # Decrement the unfinished process
-
-                wait_time = time - arrival_time[count] - burst_time[count]
+                if case == "simple":
+                    wait_time = time - arrival_time[count] - burst_time[count]
+                elif case == "complex":
+                    wait_time = time - arrival_time[count] - burst_time[count] + df['io'][count] + df['i'][count]
                 turnaround_time = time - arrival_time[count]
 
-                print("P[%d]\t|\t%d\t|\t%d" % (count + 1, wait_time, turnaround_time))
+                if quantam == 2:
+                    print("P[%d]\t|\t%d\t|\t%d" % (count + 1, wait_time, turnaround_time))
+                    turnaround_array.append(turnaround_time)  # Append the turnaround time to turnaround array
 
-                turnaround_array.append(turnaround_time) # Append the turnaround time to turnaround array
                 wait_array.append(wait_time) # Append the wait time to wait time array
 
                 flag = 0
@@ -83,5 +95,5 @@ def round_robin():
 
     print("The standard deviation is:")
     print(np.std(np.array(turnaround_array)))
-    plt.scatter(index, avg_wait_array)
+    plt.plot(index, avg_wait_array)
     plt.show()
