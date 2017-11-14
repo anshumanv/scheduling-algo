@@ -20,14 +20,14 @@ def fcfs(process):
 		print(process[0][0], "\t\t", int(process[0][2]) - int(process[0][1]), "\t\t\t", 0, "\t\t", int(process[0][2]) + int(process[0][1]))
 
 		arrivalTime = 0												# Arrival Time of every process
-		totalCompletion = int(process[0][2])						# Overall completion time
+		completionTime = int(process[0][2])						# Overall completion time
 		turnAround = [int(process[0][2]) - int(process[0][1])] 		# Stores Turnaround time of every process
 		waiting = [0]												# Stores Waiting Time of every process
 
 		for i in range(1, len(process)):
 			arrivalTime += int(process[i][1])															# Arrival time of the current process
-			completionTime = int(totalCompletion + max(int(process[i][2]), int(process[i - 1][1])))		# Completion time of the current process
-			totalCompletion += int(process[i][2])														# Total completion time till current process
+			completionTime = int(completionTime + max(0,int(process[i][1])- int(process[i-1][2]))+int(process[i][2]))		# Completion time of the current process
+			#totalCompletion += int(process[i][2])														# Total completion time till current process
 			turnAroundTime = completionTime - arrivalTime												# Turnaround Time of the current process
 			turnAround.append(turnAroundTime)															# Adding Turnaround time of the current process to the list
 			waiting.append(max(0, turnAroundTime - int(process[i][2])))									# Adding waiting time of the current process to the list
@@ -43,14 +43,14 @@ def fcfs(process):
 		print(process[0][0], "\t\t", int(process[0][2]) + float(process[0][3]) + float(process[0][4]) - int(process[0][1]), "\t\t\t", float(process[0][3]) + float(process[0][4]), "\t\t", int(process[0][2]) + float(process[0][3]) + float(process[0][4]) + int(process[0][1]))
 
 		arrivalTime = 0																							# Arrival Time of every process
-		totalCompletion = int(process[0][2]) + float(process[0][3]) + float(process[0][4])						# Overall completion time
+		completionTime = int(process[0][2]) + float(process[0][3]) + float(process[0][4])						# Overall completion time
 		turnAround = [int(process[0][2]) + float(process[0][3]) + float(process[0][4]) - int(process[0][1])]	# Stores Turnaround time of every process
 		waiting = [float(process[0][3]) + float(process[0][4])]													# Stores Waiting Time of every process
 
 		for i in range(1, len(process)):
 			arrivalTime += int(process[i][1])																											# Arrival time of the current process
-			completionTime = float(totalCompletion + max(int(process[i][2]) + float(process[i][3]) + float(process[i][4]), int(process[i - 1][1])))		# Completion time of the current process
-			totalCompletion += int(process[i][2]) + float(process[i][3]) + float(process[i][4])															# Total completion time till current process
+			completionTime = float(completionTime + max(0,int(process[i][1])-int(process[i-1][2]) - float(process[i-1][3]) - float(process[i-1][4])) + int(process[i][2]) + int(process[i][3]) + int(process[i][4]))		# Completion time of the current process
+			#totalCompletion += int(process[i][2]) + float(process[i][3]) + float(process[i][4])															# Total completion time till current process
 			turnAroundTime = completionTime - arrivalTime																								# Turnaround Time of the current process
 			turnAround.append(turnAroundTime)																											# Adding Turnaroud time of the current process to the list
 			waiting.append(max(0, turnAroundTime - (int(process[i][2]))))																				# Adding waiting tiem of the current process to the list
@@ -62,4 +62,4 @@ def fcfs(process):
 	# Case for invalid input
 	else:
 		print('Invalid Input\nGive Valid input')
-		fcfs(p)
+		fcfs(process)

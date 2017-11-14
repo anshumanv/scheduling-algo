@@ -43,7 +43,7 @@ def sjf(p):					  # p is a 2D list
         
         if check == False:                  # when no process is started , increement t
             t = t + 1
-            continue;
+            continue
         
         # Reduce remaining time by one
         if rt[shortest]>0 :
