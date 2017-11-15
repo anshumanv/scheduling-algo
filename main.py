@@ -18,14 +18,14 @@ def readFile():
 	except:
 		print("Error opening file")
 		exit()
-	finally:
-		f.close()
+	f.close()
+	return p
 
 	n = len(process)
 	for i in range(n):
 		p.append(process[i].split(' '))
 	#print(p) Test print
-	return p
+	
 
 while(True):
 	print("Enter required operation")
