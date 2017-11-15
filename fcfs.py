@@ -49,7 +49,7 @@ def fcfs(process):
 
 		for i in range(1, len(process)):
 			arrivalTime += int(process[i][1])																											# Arrival time of the current process
-			completionTime = float(completionTime + max(0,int(process[i][1])-int(process[i-1][2]) - float(process[i-1][3]) - float(process[i-1][4])) + int(process[i][2]) + int(process[i][3]) + int(process[i][4]))		# Completion time of the current process
+			completionTime = float(completionTime + max(0,int(process[i][1])-int(process[i-1][2]) - float(process[i-1][3]) - float(process[i-1][4])) + float(process[i][2]) + float(process[i][3]) + float(process[i][4]))		# Completion time of the current process
 			#totalCompletion += int(process[i][2]) + float(process[i][3]) + float(process[i][4])															# Total completion time till current process
 			turnAroundTime = completionTime - arrivalTime																								# Turnaround Time of the current process
 			turnAround.append(turnAroundTime)																											# Adding Turnaroud time of the current process to the list
