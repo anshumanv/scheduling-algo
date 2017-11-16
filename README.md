@@ -2,7 +2,12 @@
 
 > Operating System project that uses system scheduling algorithms.
 
-Project Members -
+#### Running
+```sh
+$ python3 main.py
+```
+
+#### Project Members -
 * Anshuman Verma (201651060)
 * Shivam Saboo (201651061)
 * Aman Yadav (201651007)
